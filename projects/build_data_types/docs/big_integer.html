@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../../css/github.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="project-4.a-长整数">Project 4.a 长整数</h1>
+<h2 id="简介">简介</h2>
+<p>Java 内置的整数类型 <code class="sourceCode java"><span class="dt">int</span></code> 为32 bit. 它可以表示的整数范围为 <span class="math inline">\(-2^{31}\)</span> 到 <span class="math inline">\(2^{31}-1\)</span> (约40亿个数). 这些整数足够应对普通的任务. 但一些特殊任务, 可能需要能够支持更大范围的整数. 例如在加密算法(如 <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">RSA</a> )中, 往往需要用到很大的素数. 素数越大, 加密算法越安全. 又如, 在一些模拟程序中, 为了达到足够的精度, 需要能够支持更大的整数. 长整数以对它们的操作是 <a href="https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic">高精度计算</a> 的一个基本组成部分.</p>
+<p>Java 已经包含一个长整数类 <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html">BigInteger</a>. 本次Project需要你自己动手实现一个类似的类.</p>
+<h2 id="实验内容">实验内容</h2>
+<ol style="list-style-type: decimal">
+<li><p>实现长整数类BigInt, 支持任意精度的整数及其运算. 包含以下 API :</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">BigInt()</td>
+<td align="left">默认构造函数, 初始化为0</td>
+</tr>
+<tr class="even">
+<td align="left">BigInt(String s)</td>
+<td align="left">使用字符串构造长整数</td>
+</tr>
+<tr class="odd">
+<td align="left">BigInt add(BigInt x)</td>
+<td align="left">返回与 x 的和</td>
+</tr>
+<tr class="even">
+<td align="left">BigInt substract(BigInt x)</td>
+<td align="left">返回与 x 的差</td>
+</tr>
+<tr class="odd">
+<td align="left">BigInt multiply(BigInt x)</td>
+<td align="left">返回与 x 的积</td>
+</tr>
+<tr class="even">
+<td align="left">BigInt divide(BigInt x)</td>
+<td align="left">返回除以 x 后的商</td>
+</tr>
+<tr class="odd">
+<td align="left">BigInt mod(BigInt x)</td>
+<td align="left">返回除以 x 后的余数</td>
+</tr>
+<tr class="even">
+<td align="left">int compare(BigInt x)</td>
+<td align="left">返回1 如果大于 x, -1如果小于 x, 0如果相等</td>
+</tr>
+<tr class="odd">
+<td align="left">boolean equals(BigInt x)</td>
+<td align="left">是否等于x</td>
+</tr>
+<tr class="even">
+<td align="left">String toString()</td>
+<td align="left">返回字符串表示</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>使用 BigInt 计算阶乘函数 <span class="math inline">\(n!\)</span> 及指数函数 <span class="math inline">\(2^n\)</span>.</p></li>
+<li><p>比较 BigInt 与 int 的性能差异 (例如做多次运算时间上的区别). 并尝试分析原因.</p></li>
+<li><p>比较 BigInt 与 Java 自中 BigInteger 的性能差异, 并尝试分析原因.</p></li>
+<li><p>除了已经使用的方法外, 你能否想到其他方法来实现 BigInt ?</p></li>
+</ol>
+</body>
+</html>
