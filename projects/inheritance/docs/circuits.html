@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../../css/github.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="project-5.b-电阻网络">Project 5.b 电阻网络</h1>
+<h2 id="背景">背景</h2>
+<p>物体的电阻 (resistance) 用来衡量当电流通过物体时会收到&quot;阻碍&quot;. 电阻越大, 电流同过该物体时受到的阻碍就越大. 欧姆定律刻画了电阻, 电流和电压之间的关系. <span class="math display">\[\begin{eqnarray*}
+I = \frac{V}{R}
+\end{eqnarray*}\]</span> 其中, V 表示物体两端的电压(电势差), R 为该物体的电阻, I 为通过物体的电流.电阻可以通过串联和并联的方式组合成为复杂的电阻网络:</p>
+<ul>
+<li>串联 (Series): 将两个电阻首尾相连. 其等效电阻等于两个电阻的和.</li>
+<li>并联 (Parallel): 将两个电阻并行排列. 其等效电阻等于倒数和的倒数.</li>
+</ul>
+<p>     <img src="../images/circuits/seriesparallel.png" /></p>
+<p>例如, 以下网络由两个串联电阻与第三个电阻并联形成. 它的等效电阻为<span class="math inline">\(\frac{1}{\frac{1}{R_1} + \frac{1}{R_2 + R_3}}\)</span></p>
+<p>     <img src="../images/circuits/combination.png" /></p>
+<h2 id="如何表示网络">如何表示网络</h2>
+<p>一个通过串联和并联搭建的电阻网络可以表示成为字符串. 定义</p>
+<ul>
+<li><span class="math inline">\(R\)</span> 表示单个电阻器</li>
+<li><span class="math inline">\(a\)</span> 为正数, 表示单个电阻器的取值</li>
+<li><span class="math inline">\(N\)</span> 为电阻网络</li>
+<li><span class="math inline">\((-, N, N)\)</span> 表示两个电阻网络串联后的得到的网络</li>
+<li><span class="math inline">\((/, N, N)\)</span> 表示两个电阻网络并联后的得到的网络</li>
+</ul>
+<p>电阻网络可以按照以下规则表示</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(N = (-, N, N)|(/, N, N)|R\)</span></li>
+<li><span class="math inline">\(R = a\)</span></li>
+</ol>
+<p>其中&quot;|&quot;表示或者. 规则1 表示一个电路网络要么由两个网络串联而成, 要么由两个网络并联而成, 要么是单个电阻器. 规则2 表示一个电阻器的电阻取值是多少.</p>
+<p>下面是几个例子:</p>
+<ol style="list-style-type: decimal">
+<li>两个电阻为3和5的电阻器串联可以表示为: &quot;(-, 3, 5)&quot;</li>
+<li>两个电阻为3和5的电阻器并联可以表示为: &quot;(/, 3, 5)&quot;</li>
+<li>以下网络可以表示成为: &quot;(-, (/, (/, 4, 8), 5), 3)&quot;</li>
+</ol>
+<p>     <img src="../images/circuits/parallel3.png" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>以下网络可以表示成为: &quot;(/, (-, (/, 6, 3), 2), (-, 3, 3))&quot;</li>
+</ol>
+<p>     <img src="../images/circuits/circuit2.png" /></p>
+<p>这样的表示方式称为 <a href="https://zh.wikipedia.org/wiki/%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95">上下文无关文法 (Context Free Gramma)</a>, 它是在程序语言设计, 人工智能等方向有广泛应用.</p>
+<h2 id="实验内容">实验内容</h2>
+<ol style="list-style-type: decimal">
+<li>写出下列网络的字符串表示</li>
+</ol>
+<p>     <img src="../images/circuits/series3.png" /></p>
+<p>     <img src="../images/circuits/circuit.png" /></p>
+<p>     <img src="../images/circuits/bigcircuit.png" /></p>
+<p>     <img src="../images/circuits/bigcircuit2.png" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>定义 Circuit 类用来表示电路网络.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> Circuit {  
+    <span class="kw">public</span> <span class="kw">abstract</span> <span class="dt">double</span> <span class="fu">resistance</span>();
+}</code></pre></div>
+<p>resistance() 返回该网络的等效电阻值. 给定网络的字符串表示, 构造相应的 Circuit 对象, 并输出它们的等效电阻值.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>修改 Circuit 接口, 使得给定电源电压, 能够计算任意子网络两端的电势差以及流经该网络的电流.</li>
+</ol>
+<p>     <img src="../images/circuits/circuit2withbattery.png" /></p>
+</body>
+</html>
