@@ -61,7 +61,7 @@ class CircuitFactory{
           Circuit a = buildCircuit(s, aStart, aEnd);
 
           int bStart = middle+1;
-          int bEnd = s.charAt(end-1) == ')'?end-1:end;;
+          int bEnd = s.charAt(end-1) == ')'?end-1:end;
           Circuit b = buildCircuit(s, bStart, bEnd);
 
           if (s.charAt(start+1) == '-')
