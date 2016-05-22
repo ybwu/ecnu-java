@@ -323,7 +323,7 @@
 </table></li>
 <li>另外有接口 MilkProvider, EggProvider, 分别包含方法 <code>getMilk()</code>, <code>getEgg()</code>. 修改 Cow, Hen 类的定义, 在实现 Animal 类基础上, 分别实现 MilkProvider 接口 和 EggProvider 接口.</li>
 <li>定义 Farmer 类, 包含方法 <code>fetchMilk(MilkProvider a), fetchEgg(EggProvider a)</code>.</li>
-<li><p>在 Farm 类中添加数据成员 <code>Farmer farmer</code>, <code>MilkProvider []mp</code>, <code>EggerProvider []ep</code>. 数组 <code>mp, ep</code> 分别包含 animal 数值中的 MilkProvider 和 EggProvider. 在 Farmer 类中添加新的方法 <code>produce()</code>, 以<code>mp, ep</code>数组中的对象为参数, 分别调用 farmer 对象的 <code>fetchMilk, fetchEgg</code> 方法.</p></li>
+<li><p>在 Farm 类中添加数据成员 <code>Farmer farmer</code>, <code>MilkProvider []mp</code>, <code>EggerProvider []ep</code>. 数组 <code>mp, ep</code> 分别包含 animal 数组中的 MilkProvider 和 EggProvider. 在 <del>Farmer</del> Farm 类中添加新的方法 <code>produce()</code>, 以<code>mp, ep</code>数组中的对象为参数, 分别调用 farmer 对象的 <code>fetchMilk, fetchEgg</code> 方法.</p></li>
 </ul>
 </body>
 </html>
