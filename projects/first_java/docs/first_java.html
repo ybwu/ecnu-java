@@ -89,8 +89,8 @@ sudo apt-get install openjdk-8-jdk</code></pre>
 <ol style="list-style-type: decimal">
 <li><p>打开一个文本编辑器 (例如记事本), 写入下面的程序</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> HelloWorld {
-    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span> (String args[]) {
-        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Hello World!&quot;</span>);
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span> (<span class="bu">String</span> args[]) {
+        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Hello World!&quot;</span>);
     }
 }</code></pre></div></li>
 <li><p>将其保存为HelloWorld.java. 假设保存路径为&quot;D:\HelloWorld\&quot;</p></li>
@@ -152,10 +152,10 @@ java HelloWorld</code></pre></li>
 <li>将 HelloWorld.java 中的每个空格替换为两个空格, 每行间增加一些空行, 删除每行前的空格分别会发生什么?</li>
 <li><p>编写程序 Hi.java</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> Hi {
-    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) {
-        System.<span class="fu">out</span>.<span class="fu">print</span>(<span class="st">&quot;Hi, &quot;</span>);
-        System.<span class="fu">out</span>.<span class="fu">print</span>(args[<span class="dv">0</span>]);
-        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;. How are you?&quot;</span>);
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {
+        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">print</span>(<span class="st">&quot;Hi, &quot;</span>);
+        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">print</span>(args[<span class="dv">0</span>]);
+        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;. How are you?&quot;</span>);
     }
 }</code></pre></div>
 <p>执行以下命令分别会发生什么? 你能理解 args 的含义吗?</p>
