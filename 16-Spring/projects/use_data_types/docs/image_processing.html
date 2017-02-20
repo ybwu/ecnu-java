@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../../css/github.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="project-3.b-图像处理">Project 3.b 图像处理</h1>
+<p>在这个 project 中, 你将使用 Java 进行一些简单的图像处理任务: 包括修改图像颜色, 尺寸以及为图像增加滤镜效果等. 你将看到, 一个好的包通过提供恰当的接口 (API) 能够帮助程序员在不了解底层实现的情况下便捷高效的完成工作. 在具体描述作业之前, 我们首先介绍 Java 内置的颜色类 (java.awt.Color), 以及一个由其他开发者提供的图像类 (Picture.java).</p>
+<h2 id="颜色">颜色</h2>
+<p>Java将颜色抽象成为 Color 类. 如果需要进行与颜色相关的操作, 需要在源文件开头处出加入以下语句:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import java.awt.Color;</span></code></pre></div>
+<p>Color 类使用<a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB模型</a>表示颜色. 每种颜色被三个整数确定. 每个整数的取值范围是 0 到 255, 分别表示红, 绿, 蓝三种颜色的强度. 这三种颜色的不同组合可以产生 256^3 种不同的颜色. 下表是一些颜色的 RGB 表示:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Color</th>
+<th align="right">Red</th>
+<th align="right">Green</th>
+<th align="right">Blue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">红</td>
+<td align="right">255</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">绿</td>
+<td align="right">0</td>
+<td align="right">255</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">蓝</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">255</td>
+</tr>
+<tr class="even">
+<td align="left">黑</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">深灰</td>
+<td align="right">100</td>
+<td align="right">100</td>
+<td align="right">100</td>
+</tr>
+<tr class="even">
+<td align="left">白</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">黄</td>
+<td align="right">255</td>
+<td align="right">255</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">品红</td>
+<td align="right">255</td>
+<td align="right">0</td>
+<td align="right">255</td>
+</tr>
+<tr class="odd">
+<td align="left">褐</td>
+<td align="right">160</td>
+<td align="right">82</td>
+<td align="right">45</td>
+</tr>
+</tbody>
+</table>
+<p>创建不同的颜色需要通过 Color 类的<strong>构造函数</strong>和<code>new</code>操作符:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Color red    = <span class="kw">new</span> Color(<span class="dv">255</span>,   <span class="dv">0</span>,   <span class="dv">0</span>);  
+Color white  = <span class="kw">new</span> Color(<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>);  
+Color sienna = <span class="kw">new</span> Color(<span class="dv">160</span>,  <span class="dv">82</span>,  <span class="dv">45</span>);</code></pre></div>
+<p>Color 类的提供所有方法 (API) 在 <a href="http://docs.oracle.com/javase/6/docs/api/java/awt/Color.html">Java文档</a> 中可以查询到. 其中我们可能会用到的方法总结如下. 我们建议在开始作业之前, 你可以尝试创建一些颜色, 并对所创建的颜色对象调用这些方法, 输出它们的返回值, 以便帮助你理解这些 API 的作用.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Color(int r, int g, int b)</td>
+<td align="left">Color 对象的构造函数</td>
+</tr>
+<tr class="even">
+<td align="left">int getRed()</td>
+<td align="left">获得红色的强度</td>
+</tr>
+<tr class="odd">
+<td align="left">int getGreen()</td>
+<td align="left">获得绿色的强度</td>
+</tr>
+<tr class="even">
+<td align="left">int getBlue()</td>
+<td align="left">获得蓝色的强度</td>
+</tr>
+<tr class="odd">
+<td align="left">Color brighter()</td>
+<td align="left">返回一个更深的颜色</td>
+</tr>
+<tr class="even">
+<td align="left">Color darker()</td>
+<td align="left">返回一个更浅的颜色</td>
+</tr>
+<tr class="odd">
+<td align="left">String toString()</td>
+<td align="left">该颜色的String表示</td>
+</tr>
+<tr class="even">
+<td align="left">boolean equals(Color c)</td>
+<td align="left">是否与颜色c相同</td>
+</tr>
+</tbody>
+</table>
+<p>下面我们将以计算颜色的亮度 (Luminance) 为例, 说明如何使用 Color 类. 颜色的亮度表征了显示该颜色时需要使用多少强度的光. 直观上亮度越大, 该颜色越明亮. 严格的定义如下:</p>
+<pre><code>亮度 = 0.299*r + 0.587*g + 0.114*b</code></pre>
+<p>其中, r, g, b分别代表该颜色的红, 绿, 蓝强度. 以下为对应的 Java 函数:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import java.awt.Color;</span>
+
+<span class="kw">public</span> <span class="kw">class</span> Luminance {
+
+    <span class="co">// return the monochrome luminance of given color</span>
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">double</span> <span class="fu">lum</span>(Color color) {
+        <span class="dt">int</span> r = color.<span class="fu">getRed</span>();
+        <span class="dt">int</span> g = color.<span class="fu">getGreen</span>();
+        <span class="dt">int</span> b = color.<span class="fu">getBlue</span>();
+        <span class="kw">return</span> .<span class="dv">299</span>*r + .<span class="dv">587</span>*g + .<span class="dv">114</span>*b;
+    }
+
+    <span class="co">// test </span>
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) {
+        <span class="dt">int</span>[] a = <span class="kw">new</span> <span class="dt">int</span>[<span class="dv">3</span>];
+        <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">3</span>; i++) {
+            a[i] = Integer.<span class="fu">parseInt</span>(args[i]);
+        }
+        Color c = <span class="kw">new</span> Color(a[<span class="dv">0</span>], a[<span class="dv">1</span>], a[<span class="dv">2</span>]);
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;c = &quot;</span> + c);
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;lum(c) =  &quot;</span> + <span class="fu">lum</span>(c));
+    }
+}</code></pre></div>
+<h2 id="数字图像">数字图像</h2>
+<p>一幅数字图像 (digital image) 在计算机内部被表示成像素矩阵 (pixel matrix). 每一个像素都有自己的颜色. 类比来说, 每个像素好比拼图玩具中的一块, 它们单个看起来都只是简单的色块, 但不同的块组合在一起就能构成完整的图画.</p>
+<p>在本次作业中, 我们将使用一个名为 <a href="../src/image_processing/Picture.java">Picture.java</a> 的包. 它提供了对图像操作的封装. 它的详细的文档在<a href="Picture.html">这里</a>. 我们将会用到的部分方法总结如下:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Picture(String s)</td>
+<td align="left">从文件 s 创建一个图像对象</td>
+</tr>
+<tr class="even">
+<td align="left">Picture(int w, int h)</td>
+<td align="left">创建一个宽为 w, 高为 h 的空白图像</td>
+</tr>
+<tr class="odd">
+<td align="left">int width()</td>
+<td align="left">获得图像的宽度</td>
+</tr>
+<tr class="even">
+<td align="left">int height()</td>
+<td align="left">获得图像的高度</td>
+</tr>
+<tr class="odd">
+<td align="left">Color get(int i, int j)</td>
+<td align="left">返回像素 (i, j) 的颜色</td>
+</tr>
+<tr class="even">
+<td align="left">void set(int i, int j, Color c)</td>
+<td align="left">设置像素 (i, j) 的颜色为 c</td>
+</tr>
+<tr class="odd">
+<td align="left">void show()</td>
+<td align="left">将该图像显示在一个窗口中</td>
+</tr>
+<tr class="even">
+<td align="left">void save(String s)</td>
+<td align="left">将该图像保存为文件 s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="实验内容">实验内容</h2>
+<ol style="list-style-type: decimal">
+<li><p>通过命令行参数给定一个图片文件, 输出它的长和宽. (以下各题中的图片文件, 参数都通过命令行参数形式给出).</p></li>
+<li><p>给定一个图片文件, 将其转换成为相应的灰度图 (Grayscale). 当 RGB 颜色模型中红绿蓝三色强度取相同值 v 时, 该颜色为灰色, 其灰度值为 v (0&lt;= v &lt;= 255). 图片的灰度图可以通过如下方法得到: 将图中每个像素点的颜色置为灰色, 且这些灰色的灰度值等于该颜色亮度.</p>
+<p><img src="../images/baboon.jpg" /> <img src="../images/baboon-grayscale.jpg" /></p></li>
+<li><p>给定一个图片文件, 以及参数 w, h, 将其转换成为宽为 w, 高为 h 的图片.</p>
+<p><img src="../images/mandrill200x400.jpg" /> <img src="../images/mandrill200x200.jpg" /></p></li>
+<li><p>给定一个图片文件, 以及参数N. 输出 N 张图片, 其中第n张图片为从输入图片和其对应灰度图的一个渐变图.</p></li>
+<li><p>给定一个图片文件, 输出一个它的矩形剪裁, 要求尽量去除图片中的空白边界 (automatic cropping).</p></li>
+<li><p>给定一个图片文件, 以及参数x, y, E. 输出原始图片的一个正方形裁剪, 其中正方形的中心在 (x, y), 边长是 E. x, y, E 为百分比. 例如 x=10, y=20, E=20, 表示中心位于 原始图片宽的10%, 高20%处. 边长为原始宽度的20%.</p></li>
+<li><p>给定一个图片文件, 产生该图片的一个镜像图片(关于 y 轴对称)</p></li>
+<li>滤镜 (filters) 可以看作对像素矩阵的某种变换. 通过添加滤镜, 我们可以改变图片的视觉效果. 请实现以下滤镜.
+<ul>
+<li>Linear filter: 每一个像素的颜色变为周围 9 个像素点(包含它本身)颜色的平均值. 这个变换等价于将矩阵[1, 1, 1; 1, 1, 1; 1, 1, 1]/9 与 9个像素点做 <em>卷积 (Convolution)</em> . 而这个矩阵被称为卷积矩阵 (convolutional matrix). 关于卷积矩阵可以参考<a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">1</a>, <a href="https://docs.gimp.org/en/plug-in-convmatrix.html">2</a>.</li>
+<li>Blur filter: 卷积矩阵为 [1/13, 1/13, 1/13; 1/13, 5/13, 1/13; 1/13, 1/13, 1/13].</li>
+<li>Emboss filter: 卷积矩阵为 [-1, 0, 1; -1, 1, 1; -1, 0, 1], 或者 [1, 0, -1; 2, 0, -2; 1, 0, -1] 或者[-1, -1, 0; -1, 1, 1; 0, 1, 1].</li>
+<li>Sharpen filter: 卷积矩阵为 [0, -1, 0; -1, 5, -1; 0, -1, 0].</li>
+<li>Oil painting filter: 给定参数 w, 将每个像素 (i, j) 的颜色替换为所有与 (i, j) <em>Manhattan 距离</em> 小于 w 的像素点中出现次数最多的颜色. 其中 Manhattan 距离(也称为 <span class="math inline">\(l_1\)</span> 距离)定义见 <a href="https://en.wikipedia.org/wiki/Taxicab_geometry">3</a>, <a href="http://mathworld.wolfram.com/TaxicabMetric.html">4</a>.</li>
+</ul></li>
+<li><p>提升一张图片的亮度 (Brightness).</p></li>
+<li><p>董小姐, 她嘴角向下的时候很美, 像安和桥下清澈的水. 你爱上了这匹野马, 可家里却没有草原. 这让你感到绝望, 程序员. 董小姐熄灭了烟翻起照片, 一张是北方寒夜里的四季如春, 一张是南方艳阳里的大雪纷飞. 你看着照片, 心里一直重复, 这些可能都不会是真的, 董小姐, 事实上, 图片的滤镜效果可以看成像素矩阵的一种变换. 相比于使用固定的卷积矩阵, 这些复杂的滤镜可能经过了美工设计师的设计. 但无论怎样, 确定某种滤镜(比如智能手机 APP (Instagram, 足迹, 美图秀秀等) 提供的内置滤镜)对应的变换, 只需确定每种颜色经过滤镜后被变换成了哪一种颜色. 而你应该能有办法大概的确定这个映射. 好了, 董小姐, 现在那些可能都会是真的了, 写信告诉我今天海是什么颜色吧.</p></li>
+</ol>
+</body>
+</html>

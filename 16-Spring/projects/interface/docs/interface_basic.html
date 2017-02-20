@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../css/github.css" type="text/css" />
+</head>
+<body>
+<h1 id="project-6.a-接口与抽象类基础">Project 6.a 接口与抽象类基础</h1>
+<h2 id="实验内容">实验内容</h2>
+<ol style="list-style-type: decimal">
+<li>定义并实现以下商品相关的类结构.</li>
+</ol>
+<ul>
+<li><p>Item 抽象类.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">数据成员</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">name (String, protected, final)</td>
+<td align="left">商品名称</td>
+</tr>
+<tr class="even">
+<td align="left">cost (double, protected, final)</td>
+<td align="left">价格</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">getCost()</td>
+<td align="left">返回价格</td>
+</tr>
+<tr class="even">
+<td align="left">getName()</td>
+<td align="left">返回名称</td>
+</tr>
+<tr class="odd">
+<td align="left">costPerUnit()</td>
+<td align="left">单价, 抽象方法</td>
+</tr>
+<tr class="even">
+<td align="left">toString()</td>
+<td align="left">转化为 String</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Produce 类 (生鲜商品). 为 Item 的子类.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">数据成员</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">pounds (double, private)</td>
+<td align="left">商品重量</td>
+</tr>
+<tr class="even">
+<td align="left">category (String, private)</td>
+<td align="left">种类 (例如: Vegetable, fruit)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">costPerUnit()</td>
+<td align="left">单价</td>
+</tr>
+<tr class="even">
+<td align="left">getPounds()</td>
+<td align="left">返回重量(Kg)</td>
+</tr>
+<tr class="odd">
+<td align="left">setPounds()</td>
+<td align="left">设置重量</td>
+</tr>
+<tr class="even">
+<td align="left">getCategory()</td>
+<td align="left">返回种类</td>
+</tr>
+<tr class="odd">
+<td align="left">setCategory()</td>
+<td align="left">设置种类</td>
+</tr>
+<tr class="even">
+<td align="left">toString()</td>
+<td align="left">转化为 String</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Beverage 类 (饮品). 为 Item 的子类</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">数据成员</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">volumn (double, private)</td>
+<td align="left">商品体积(L)</td>
+</tr>
+<tr class="even">
+<td align="left">containerDeposit (double, private)</td>
+<td align="left">回收费用</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">costPerUnit()</td>
+<td align="left">单价</td>
+</tr>
+<tr class="even">
+<td align="left">getCost()</td>
+<td align="left">重写返回价格函数, 需回收费用</td>
+</tr>
+<tr class="odd">
+<td align="left">getVolumn()</td>
+<td align="left">返回体积</td>
+</tr>
+<tr class="even">
+<td align="left">setVolumn()</td>
+<td align="left">设置体积</td>
+</tr>
+<tr class="odd">
+<td align="left">getContainerDeposit()</td>
+<td align="left">返回回收费用</td>
+</tr>
+<tr class="even">
+<td align="left">setContainerDeposit()</td>
+<td align="left">设置回收费用</td>
+</tr>
+<tr class="odd">
+<td align="left">toString()</td>
+<td align="left">转化为 String</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Package 类(包装在盒子中的商品). 为 Item 的子类</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">数据成员</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">length (double, private)</td>
+<td align="left">包装盒的长度</td>
+</tr>
+<tr class="even">
+<td align="left">width (double, private)</td>
+<td align="left">包装的宽度</td>
+</tr>
+<tr class="odd">
+<td align="left">height (double, private)</td>
+<td align="left">包装的高度</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">costPerUnit()</td>
+<td align="left">单价</td>
+</tr>
+<tr class="even">
+<td align="left">getSize()</td>
+<td align="left">返回体积</td>
+</tr>
+<tr class="odd">
+<td align="left"><del>setSize()</del></td>
+<td align="left"><del>设置体积</del></td>
+</tr>
+<tr class="even">
+<td align="left">toString()</td>
+<td align="left">转化为 String</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>ShoppingCart 类 (购物车).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">数据成员</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cart (array, private)</td>
+<td align="left">放置 Item 的数组</td>
+</tr>
+<tr class="even">
+<td align="left">maxSize (int)</td>
+<td align="left">cart数组长度</td>
+</tr>
+<tr class="odd">
+<td align="left">currentSize (int)</td>
+<td align="left">购物车当前有多少商品</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">addItem()</td>
+<td align="left">添加商品</td>
+</tr>
+<tr class="even">
+<td align="left">display()</td>
+<td align="left">输出商品信息</td>
+</tr>
+<tr class="odd">
+<td align="left">totalCost()</td>
+<td align="left">输出购物车内商品总价</td>
+</tr>
+<tr class="even">
+<td align="left">numberInCart(s)</td>
+<td align="left">给定商品名称s, 查看购物车中有多少该商品</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>农场中有许多动物, 动物表示为 Animal 接口, 它包含方法</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">String getType()</td>
+<td align="left">返回动物的类型</td>
+</tr>
+<tr class="even">
+<td align="left">String getSound()</td>
+<td align="left">返回动物的叫声(比如&quot;moo&quot; (牛), &quot;cheep&quot;(鸡), &quot;oink&quot; (猪))</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<ul>
+<li>编写Cow, Hen, Pig 类, 实现 Animal 接口.</li>
+<li><p>定义 Farm 类, 包含以下方法</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">数据成员</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">animals (array, private)</td>
+<td align="left">包含农场中的动物</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">animalSound()</td>
+<td align="left">打印农场中所有动物的叫声</td>
+</tr>
+</tbody>
+</table></li>
+<li>另外有接口 MilkProvider, EggProvider, 分别包含方法 <code>getMilk()</code>, <code>getEgg()</code>. 修改 Cow, Hen 类的定义, 在实现 Animal 类基础上, 分别实现 MilkProvider 接口 和 EggProvider 接口.</li>
+<li>定义 Farmer 类, 包含方法 <code>fetchMilk(MilkProvider a), fetchEgg(EggProvider a)</code>.</li>
+<li><p>在 Farm 类中添加数据成员 <code>Farmer farmer</code>, <code>MilkProvider []mp</code>, <code>EggerProvider []ep</code>. 数组 <code>mp, ep</code> 分别包含 animal 数组中的 MilkProvider 和 EggProvider. 在 <del>Farmer</del> Farm 类中添加新的方法 <code>produce()</code>, 以<code>mp, ep</code>数组中的对象为参数, 分别调用 farmer 对象的 <code>fetchMilk, fetchEgg</code> 方法.</p></li>
+</ul>
+</body>
+</html>
