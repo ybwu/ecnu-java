@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../../../css/github.css" type="text/css" />
+</head>
+<body>
+<h1 id="project-6.c-序列与迭代器">Project 6.c 序列与迭代器</h1>
+<h2 id="实验内容">实验内容</h2>
+<ol style="list-style-type: decimal">
+<li><p>定义 SequenceItem 类, 包含一个字符串作为数据, 并提供以下方法</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">getData()</td>
+<td align="left">返回所包含的字符串</td>
+</tr>
+<tr class="even">
+<td align="left">setData()</td>
+<td align="left">设置所包含的字符串</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>定义 Sequence 接口, 包括以下方法</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">add(item)</td>
+<td align="left">将 SequenceItem 类型的对象 item 加入序列</td>
+</tr>
+<tr class="even">
+<td align="left">get(i)</td>
+<td align="left">将第 i 个SequenceItem 对象返回</td>
+</tr>
+<tr class="odd">
+<td align="left">remove(item)</td>
+<td align="left">删除 item 对象</td>
+</tr>
+<tr class="even">
+<td align="left">contains(item)</td>
+<td align="left">返回是否包含 item</td>
+</tr>
+<tr class="odd">
+<td align="left">size()</td>
+<td align="left">返回序列长度</td>
+</tr>
+<tr class="even">
+<td align="left">isEmpty()</td>
+<td align="left">返回序列是否为空</td>
+</tr>
+<tr class="odd">
+<td align="left">iterator()</td>
+<td align="left">返回一个迭代器对象, 用于顺序访问序列元素 (见 SeqIterator 接口描述)</td>
+</tr>
+<tr class="even">
+<td align="left">reverseIterator()</td>
+<td align="left">返回一个迭代器对象, 用于倒序访问序列元素</td>
+</tr>
+<tr class="odd">
+<td align="left">biIterator()</td>
+<td align="left">返回一个迭代器对象, 可以双向访问序列元素 (见 SeqBiIterator 接口描述)</td>
+</tr>
+<tr class="even">
+<td align="left">toArray()</td>
+<td align="left">返回序列的数组表示</td>
+</tr>
+<tr class="odd">
+<td align="left">equals(seq)</td>
+<td align="left">返回该序列是否与 seq 序列相同</td>
+</tr>
+<tr class="even">
+<td align="left">toString()</td>
+<td align="left">转化为 String</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>定义 SeqIterator 接口, 包括以下方法</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">hasNext()</td>
+<td align="left">返回是否能取下一个 SequenceItem 对象</td>
+</tr>
+<tr class="even">
+<td align="left">next()</td>
+<td align="left">取下一个 SequenceItem 对象</td>
+</tr>
+<tr class="odd">
+<td align="left">remove()</td>
+<td align="left">删除前一个被返回的 SequenceItem 对象</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>定义 BiSeqIterator 接口, 扩展 SeqIterator 接口, 包含以下方法</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">方法 </th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">hasPrevious()</td>
+<td align="left">返回是否能取前一个 SequenceItem 对象</td>
+</tr>
+<tr class="even">
+<td align="left">previous()</td>
+<td align="left">取前一个 SequenceItem 对象</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>编写类 LinkedSequence 用<a href="https://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/linked%20lists.html">链表</a>实现 Sequence 接口, 使用内部类实现 iterator(), reverseIterator(), biIterator().</p></li>
+<li><p>编写类 ArraySequence 用可变长度数组实现 Sequence 接口, 使用内部类实现 iterator(), reverseIterator(), biIterator(). (提示: 使用数组存储 SequenceItem 对象, 当数组容量不够时, 申请一个两倍长度的数组. 当数组元素数量小于容量的1/4时, 缩减数组长度为1/2).</p></li>
+<li><p>请比较 LinkedSequence 与 ArraySequence 在插入, 删除, 访问(例如, 顺序访问, 倒序访问, 随机访问) 等操作的性能.</p></li>
+<li><p>编写类 IteratorTest, 包含静态方法 <code>display(Iterator i)</code> 顺序输出 Sequence 的内容.</p></li>
+</ol>
+</body>
+</html>
