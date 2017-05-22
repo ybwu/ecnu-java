@@ -149,11 +149,11 @@
 <td align="left">重写返回价格函数, 需回收费用</td>
 </tr>
 <tr class="odd">
-<td align="left">getVolumn()</td>
+<td align="left">getVolume()</td>
 <td align="left">返回体积</td>
 </tr>
 <tr class="even">
-<td align="left">setVolumn()</td>
+<td align="left">setVolume()</td>
 <td align="left">设置体积</td>
 </tr>
 <tr class="odd">
@@ -319,7 +319,7 @@
 </table></li>
 <li>另外有接口 MilkProvider, EggProvider, 分别包含方法 <code>getMilk()</code>, <code>getEgg()</code>. 修改 Cow, Hen 类的定义, 在实现 Animal 类基础上, 分别实现 MilkProvider 接口 和 EggProvider 接口.</li>
 <li>定义 Farmer 类, 包含方法 <code>fetchMilk(MilkProvider a), fetchEgg(EggProvider a)</code>.</li>
-<li>在 Farm 类中添加数据成员 <code>Farmer farmer</code>, <code>MilkProvider []mp</code>, <code>EggerProvider []ep</code>. 数组 <code>mp, ep</code> 分别包含 animal 数组中的 MilkProvider 和 EggProvider.</li>
+<li>在 Farm 类中添加数据成员 <code>Farmer farmer</code>, <code>MilkProvider []mp</code>, <code>EggProvider []ep</code>. 数组 <code>mp, ep</code> 分别包含 animal 数组中的 MilkProvider 和 EggProvider.</li>
 <li><p>在 Farm 类中添加新方法 <code>produce()</code>, 对<code>mp, ep</code>数组中的对象, 调用 Farmer 对象的 <code>fetchMilk, fetchEgg</code> 方法.</p></li>
 </ul>
 </body>
