@@ -112,14 +112,14 @@ T_m^{(2)}  = \frac{h}{6}\left(f(a) + f(b) + 2\sum_{i=1}^{m-1}f(x_i) + 4\sum_{i=1
 </ol>
 <ul>
 <li>Linear 类. 代表函数 <span class="math inline">\(kx+b\)</span>, 其中 <span class="math inline">\(k, b\)</span> 为参数</li>
-<li>Quadartic 类. 代表函数 <span class="math inline">\(ax^2 + bx + c\)</span> 其中, <span class="math inline">\(a, b, c\)</span> 为参数</li>
+<li>Quadratic 类. 代表函数 <span class="math inline">\(ax^2 + bx + c\)</span> 其中, <span class="math inline">\(a, b, c\)</span> 为参数</li>
 <li>Sin 类. 代表函数 <span class="math inline">\(\sin(\omega x + \varphi)\)</span>, 其中 <span class="math inline">\(\omega, \varphi\)</span> 为参数</li>
 <li>NormalPDF 类. 代表函数 <span class="math inline">\(e^{-\frac{(x-\mu)^2}{2\sigma^2}}\)</span>, 其中 <span class="math inline">\(\mu, \sigma\)</span> 为参数.</li>
 </ul>
 <ol start="4" style="list-style-type: decimal">
 <li><p>定义类 NewtonRoot , 包含方法 <code>findRoot</code>. 使用牛顿法寻找函数 f 的根 (见 Project 2 第6题). 并对以上四个函数类进行测试.</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="dt">double</span> <span class="fu">findRoot</span>(DifferentiableFunction f)</code></pre></div></li>
-<li><p>定义类 NewtonCatos, 包含方法 <code>Trapozoidal</code> 使用梯形公式计算 f 在 <span class="math inline">\([a, b]\)</span> 上的积分. 同时包含方法 <code>Simpson</code>, 使用 Simpson 公式计算定积分. 对以上四个函数类进行测试.</p>
+<li><p>定义类 NewtonCotes, 包含方法 <code>Trapozoidal</code> 使用梯形公式计算 f 在 <span class="math inline">\([a, b]\)</span> 上的积分. 同时包含方法 <code>Simpson</code>, 使用 Simpson 公式计算定积分. 对以上四个函数类进行测试.</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="dt">double</span> <span class="fu">Trapozoidal</span>(Function f, <span class="dt">double</span> a, <span class="dt">double</span> b)
 <span class="dt">double</span> <span class="fu">Simpson</span>(Function f, <span class="dt">double</span> a, <span class="dt">double</span> b)</code></pre></div></li>
 </ol>
