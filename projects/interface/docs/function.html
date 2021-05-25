@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>function</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../../css/github.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="project-6.b-数值计算">Project 6.b 数值计算</h1>
+<h2 id="背景">背景</h2>
+<h3 id="数值积分-numerical-integration">数值积分 (Numerical Integration)</h3>
+<p>微积分基本定理 (Newton-Leibniz 公式) <span class="math inline">\(\int_a^b f(x)\mathrm{d}x = F(b) - F(a)\)</span> 是求解定积分的重要方法. 但在实际应用中我们发现仅使用 N-L 公式是不够的. 一方面, 大部分可积函数的原函数不是初等函数(例如 <span class="math inline">\(\frac{\sin(x)}{x}\)</span>), 无法使用 N-L 公式. 另一方面, 许多函数只是通过实验, 采样等方法获得若干自变量对应的函数值, 而无法确定函数的表达式. 针对这些问题, 我们需要近似算法来估计定积分的值, 其中数值积分是一类重要方法.</p>
+<p>为了求解 <span class="math inline">\(\int_a^b f(x)\mathrm{d}x\)</span>, 我们希望通过一个可积函数 <span class="math inline">\(p(x)\)</span> 来代替 <span class="math inline">\(f(x)\)</span>. 一方面 <span class="math inline">\(p(x)\)</span> 的原函数比较容易求出. 另一方面, <span class="math inline">\(p(x)\)</span> 能够充分逼近 <span class="math inline">\(f(x)\)</span>, 使得 <span class="math inline">\(\int_a^b f(x) \approx \int_a^b p(x)\)</span>. 在这里, 我们将 <span class="math inline">\(p(x)\)</span> 取为n阶多项式函数 <span class="math inline">\(p_n(x)\)</span>.</p>
+<p>将积分区间 <span class="math inline">\([a, b]\)</span> 以步长 <span class="math inline">\(h=\frac{b-a}{n}\)</span> 划分为 <span class="math inline">\(n\)</span> 等分. 以分点 <span class="math inline">\(x_i = a+ih, i = 0, 1, ..., n\)</span> 为结点, 做 <span class="math inline">\(f(x)\)</span> 的 <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial">Lagrange 插值多项式</a> <span class="math inline">\(p_n(x)\)</span> <span class="math display">\[\begin{eqnarray*}
+f(x) \approx p_n(x) = \sum_{i=0}^n\left(\prod_{j=0, j\neq i}^n\frac{x-x_j}{x_i-x_j}\right)f(x_i)
+\end{eqnarray*}\]</span></p>
+<p>容易验证, <span class="math inline">\(p_n(x_i) = f(x_i)\)</span>, 即在分点 <span class="math inline">\(x_1, x_2, ..., x_n\)</span> 处 <span class="math inline">\(p_n(x) = f(x)\)</span>. 进一步有, <span class="math display">\[\begin{eqnarray*}
+\int_a^bf(x)\mathrm{d}x \approx \int_a^b p_n(x)\mathrm{d}x = (b-a)\sum_{i=0}^nC_i^{(n)}f(x_i)
+\end{eqnarray*}\]</span> 其中 <span class="math display">\[\begin{eqnarray*}
+C_i^{(n)} = \frac{1}{b-a} \int_a^b\prod_{j=0, j\neq i}^n\frac{x-x_j}{x_i-x_j}\mathrm{d}x
+\end{eqnarray*}\]</span> 令 <span class="math inline">\(x = a+th\)</span>, <span class="math display">\[\begin{eqnarray*}
+C_i^{(n)} = \frac{h}{b-a} \int_0^n\prod_{j=0, j\neq i}^n\frac{t-j}{i-j}\mathrm{d}t
+= \frac{1}{n}\frac{(-1)^{n-i}}{i!(n-i)!} \int_0^n\prod_{j=0, j\neq i}^n(t-j)\mathrm{d}t
+\end{eqnarray*}\]</span></p>
+<p>这称为 <em>Newton-Cotes 积分公式</em>. 通过N-C公式计算定积分, 需要给定 <span class="math inline">\(n+1\)</span> 个分点处的函数值 <span class="math inline">\(f(x_0), f(x_2), ..., f(x_n)\)</span>. <span class="math inline">\(C_i^{(n)}\)</span> 称为 Cotes 系数, 它与被积区间与被积函数 <span class="math inline">\(f(x)\)</span> 无关, 可以事先计算好.</p>
+<p>容易看出 <span class="math inline">\(C_i^{(n)}\)</span> 有如下性质</p>
+<ul>
+<li><span class="math inline">\(C_i^{(n)} = C_{n-i}^{(n)}, \forall i = 0, 1, ..., n\)</span></li>
+<li>由于对 <span class="math inline">\(f(x)\equiv 1\)</span>, Newton-Cotes 公式精确成立, 因此 <span class="math display">\[\begin{eqnarray*}
+&amp; \int_a^b 1\cdot\mathrm{d}x = (b-a)\sum_{i=0}^n C_i^{(n)} \\
+\Rightarrow &amp; \sum_{i=0}^n C_i^{(n)} = 1
+\end{eqnarray*}\]</span></li>
+</ul>
+<h3 id="梯形公式">梯形公式</h3>
+<p>在 Newton-Cotes 公式中取 <span class="math inline">\(n=1\)</span> (即使用过点 <span class="math inline">\((a, f(a)), (b, f(b))\)</span> 的线性函数来拟合<span class="math inline">\(f(x)\)</span>), 由 Cotes 系数的性质可得 <span class="math inline">\(C_0^{(1)} = C_1^{(1)} = \frac{1}{2}\)</span>, 因此 <span class="math display">\[\begin{eqnarray*}
+\int_a^bf(x)\mathrm{d}x \approx \frac{b-a}{2}\left(f(a) + f(b)\right)
+\end{eqnarray*}\]</span> 几何意义是, 通过梯形的面积来近似函数 <span class="math inline">\(f(x)\)</span> 所围成的面积.</p>
+<h3 id="simpson-公式">Simpson 公式</h3>
+<p>在 Newton-Cotes 公式中取 <span class="math inline">\(n=2\)</span>, <span class="math display">\[\begin{eqnarray*}
+&amp; C_0^{(2)} = \frac{1}{4}\int_0^2(t-1)(t-2)\mathrm{d}t = \frac{1}{6} = C_2^{(2)}\\
+&amp; C_1^{(2)} = 1- C_0^{(2)} - C_2^{(2)}= \frac{4}{6}
+\end{eqnarray*}\]</span> 因此得到 Simpson 公式: <span class="math display">\[\begin{eqnarray*}
+\int_a^bf(x)\mathrm{d}x \approx \frac{b-a}{6}\left(f(a) + 4f\left(\frac{a+b}{2}\right)+ f(b)\right)
+\end{eqnarray*}\]</span></p>
+<h3 id="复化的梯形公式">复化的梯形公式</h3>
+<p>对积分区间直接使用梯形公式得到的近似往往比较粗略. 我们可以将积分区间 <span class="math inline">\([a, b]\)</span> 划分为更小的区间, 通过在每一个小的区间上使用梯形公式得到更精确的结果. 这也称为复化的梯形公式.</p>
+<p>将<span class="math inline">\([a, b]\)</span> 以步长 <span class="math inline">\(h=\frac{b-a}{m}\)</span> 划分为 <span class="math inline">\(m\)</span> 等分. <span class="math inline">\(x_i = a+ih, i = 0, 1, ..., m\)</span>. 在每一个小区间 <span class="math inline">\([x_{i-1}, x_i]\)</span> 上使用梯形公式</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\int_a^bf(x)\mathrm{d}x = \sum_{i=1}^m \int_{x_{i-1}}^{x_i} f(x)\mathrm{d}x \approx \sum_{i=1}^m \frac{h}{2}\left(f(x_{i-1}) + f(x_i)\right) = T_m^{(1)} 
+\end{eqnarray*}\]</span> 其中 <span class="math display">\[\begin{eqnarray*}
+T_m^{(1)}  = \frac{h}{2}\left(f(a) + f(b) + 2\sum_{i=1}^{m-1}f(x_i)\right)
+\end{eqnarray*}\]</span></p>
+<h3 id="复化的-simpson-公式">复化的 Simpson 公式</h3>
+<p>我们可以用同样的方法在小区间中使用 Simpson 公式. 令<span class="math inline">\(x_{i-\frac{1}{2}}\)</span> 为<span class="math inline">\([x_{i-1}, x_i]\)</span>的中点</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\int_a^bf(x)\mathrm{d}x = \sum_{i=1}^m \int_{x_{i-1}}^{x_i} f(x)\mathrm{d}x \approx T_m^{(2)} 
+\end{eqnarray*}\]</span> 其中 <span class="math display">\[\begin{eqnarray*}
+T_m^{(2)}  = \frac{h}{6}\left(f(a) + f(b) + 2\sum_{i=1}^{m-1}f(x_i) + 4\sum_{i=1}^mf(x_{i-\frac{1}{2}})\right)
+\end{eqnarray*}\]</span></p>
+<h2 id="实验内容">实验内容</h2>
+<ol type="1">
+<li>定义接口 Function, 包含 eval 方法, 返回函数在自变量 x 处的取值.</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dt">double</span> <span class="fu">eval</span>(<span class="dt">double</span> x)</a></code></pre></div>
+<ol start="2" type="1">
+<li>定义 接口 DifferentiableFunction, 扩展 Function 接口表示可微函数, 包含 diff 方法, 返回导函数在变量 x 处的取值.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dt">double</span> <span class="fu">diff</span>(<span class="dt">double</span> x)</a></code></pre></div>
+<ol start="3" type="1">
+<li>通过实现 DifferentiableFunction 接口, 实现以下类</li>
+</ol>
+<ul>
+<li>Linear 类. 代表函数 <span class="math inline">\(kx+b\)</span>, 其中 <span class="math inline">\(k, b\)</span> 为参数</li>
+<li>Quadartic 类. 代表函数 <span class="math inline">\(ax^2 + bx + c\)</span> 其中, <span class="math inline">\(a, b, c\)</span> 为参数</li>
+<li>Sin 类. 代表函数 <span class="math inline">\(\sin(\omega x + \varphi)\)</span>, 其中 <span class="math inline">\(\omega, \varphi\)</span> 为参数</li>
+<li>NormalPDF 类. 代表函数 <span class="math inline">\(e^{-\frac{(x-\mu)^2}{2\sigma^2}}\)</span>, 其中 <span class="math inline">\(\mu, \sigma\)</span> 为参数.</li>
+</ul>
+<ol start="4" type="1">
+<li>定义类 NewtonRoot , 包含方法 <code>findRoot</code>. 使用牛顿法寻找函数 f 的根 (见 Project 2 第6题). 并对以上四个函数类进行测试.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">double</span> <span class="fu">findRoot</span>(DifferentiableFunction f)</a></code></pre></div>
+<ol start="5" type="1">
+<li>定义类 NewtonCatos, 包含方法 <code>Trapozoidal</code> 使用梯形公式计算 f 在 <span class="math inline">\([a, b]\)</span> 上的积分. 同时包含方法 <code>Simpson</code>, 使用 Simpson 公式计算定积分. 对以上四个函数类进行测试.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dt">double</span> <span class="fu">Trapozoidal</span>(Function f, <span class="dt">double</span> a, <span class="dt">double</span> b)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="dt">double</span> <span class="fu">Simpson</span>(Function f, <span class="dt">double</span> a, <span class="dt">double</span> b)</a></code></pre></div>
+</body>
+</html>
